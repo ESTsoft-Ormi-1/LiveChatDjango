@@ -29,3 +29,4 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+# Fork 하기
