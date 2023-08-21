@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Post
+from .models import Post, HashTag
 from .forms import PostForm
 from .serializers import PostSerializer, HashTagSerializer
 
@@ -9,7 +9,7 @@ from .serializers import PostSerializer, HashTagSerializer
 class Index(APIView):
 
     def get (self, request):
-        posts = Post.object.all()
+        posts = Post.objects.all()
         serialized_posts = PostSerializer(posts, many=True)
         return Response(serialized_posts.data)
     
@@ -17,9 +17,17 @@ class Index(APIView):
 class DetailView(APIView):
     
     def get(self, request, pk):
-        post = Post.objects.get(pk=pk)
-        serializer = PostSerializer(post)
-        return Response(serializer.data)
+        post = Post.objects.prefetch_related('hashtag_set').get(pk=pk)
+        
+        hashtags = post.hashtag_set.all()
+        serialized_hashtags = HashTagSerializer(hashtags, many=True).data
+
+        data = {
+            "post_id": pk,
+            "hashtags": serialized_hashtags
+        }
+        
+        return Response(data)
 
 
 class Write(APIView):
@@ -54,3 +62,22 @@ class Delete(APIView):
         post = Post.objects.get(pk=pk)
         post.delete()
         return Response({ 'msg': 'Post deleted' }, status=status.HTTP_204_NO_CONTENT)
+    
+
+### HashTag
+class HashTagWrite(APIView):
+    
+    def post(self, request, pk):
+        serializer = HashTagSerializer(data=request.data)
+        if serializer.is_valid():
+            hashtag = serializer.save() # writer=request.user
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class HashTagDelete(APIView):
+    
+    def post(self, request, pk):
+        hashtag = HashTag.objects.get(pk=pk)        
+        hashtag.delete()
+        return Response({ 'msg': 'HashTag deleted' }, status=status.HTTP_204_NO_CONTENT)
