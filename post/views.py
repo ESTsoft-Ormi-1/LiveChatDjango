@@ -65,19 +65,19 @@ class Delete(APIView):
     
 
 ### HashTag
-class HashTagWrite(APIView):
+# class HashTagWrite(APIView):
     
-    def post(self, request, pk):
-        serializer = HashTagSerializer(data=request.data)
-        if serializer.is_valid():
-            hashtag = serializer.save() # writer=request.user
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request, pk):
+#         serializer = HashTagSerializer(data=request.data)
+#         if serializer.is_valid():
+#             hashtag = serializer.save() # writer=request.user
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-class HashTagDelete(APIView):
+# class HashTagDelete(APIView):
     
-    def post(self, request, pk):
-        hashtag = HashTag.objects.get(pk=pk)        
-        hashtag.delete()
-        return Response({ 'msg': 'HashTag deleted' }, status=status.HTTP_204_NO_CONTENT)
+#     def post(self, request, pk):
+#         hashtag = HashTag.objects.get(pk=pk)        
+#         hashtag.delete()
+#         return Response({ 'msg': 'HashTag deleted' }, status=status.HTTP_204_NO_CONTENT)
