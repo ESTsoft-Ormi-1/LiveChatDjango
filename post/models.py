@@ -16,3 +16,6 @@ class Post(models.Model):
         self.hit += 1
         self.save()
         return self.hit
+
+
+
