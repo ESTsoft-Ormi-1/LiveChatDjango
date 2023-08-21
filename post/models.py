@@ -16,3 +16,12 @@ class Post(models.Model):
         self.hit += 1
         self.save()
         return self.hit
+
+
+class HashTag(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    name = models.CharField(max_length=10)
+    writer = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.name
