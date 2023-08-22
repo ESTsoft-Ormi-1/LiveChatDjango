@@ -43,9 +43,11 @@ class Write(APIView):
                     tags_data = [tags_data]
                 for tag_name in tags_data:
                     tag, created = Tag.objects.get_or_create(name=tag_name)
-                    tags_list.append(tag)
+                    tags_list.append(tag.pk)
 
-            post = serializer.save(writer=request.user)
+            print(tags_list)
+
+            post = serializer.save() #writer=request.user
             post.tags.set(tags_list)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)

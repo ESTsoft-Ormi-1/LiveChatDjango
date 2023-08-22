@@ -13,7 +13,7 @@ class Post(models.Model):
     writer = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ForeignKey(Tag, on_delete=models.CASCADE,blank=True)
     hit = models.PositiveIntegerField(default=0)
 
     def __str__(self):
