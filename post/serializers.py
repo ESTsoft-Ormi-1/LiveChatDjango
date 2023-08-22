@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, HashTag
+from .models import Post, Tag
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,7 +8,7 @@ class PostSerializer(serializers.ModelSerializer):
         exclude = ['writer'] # writer은 request.user로 받을 때
 
 
-class HashTagSerializer(serializers.ModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = HashTag
+        model = Tag
         fields = '__all__'

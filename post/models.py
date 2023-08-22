@@ -1,6 +1,6 @@
 from django.db import models
 
-class HashTag(models.Model):
+class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -13,7 +13,7 @@ class Post(models.Model):
     writer = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    hashtags = models.ManyToManyField(HashTag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     hit = models.PositiveIntegerField(default=0)
 
     def __str__(self):

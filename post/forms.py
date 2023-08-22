@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, HashTag
+from .models import Post, Tag
 
 
 class PostForm(forms.ModelForm):
@@ -7,10 +7,3 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content']
-
-
-class HashTagForm(forms.ModelForm):
-    
-    class Meta:
-        model = HashTag
-        fields = ['name']
