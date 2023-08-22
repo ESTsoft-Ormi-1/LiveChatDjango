@@ -4,8 +4,8 @@ from .models import Post, Tag
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        # fields = '__all__'
-        exclude = ['writer'] # writer은 request.user로 받을 때
+        fields = '__all__'
+        # exclude = ['writer'] # writer은 request.user로 받을 때
 
 
 class TagSerializer(serializers.ModelSerializer):
