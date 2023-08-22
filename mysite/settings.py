@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     # thrid apps
-
+    'user',
     # local apps
     
 ]
@@ -112,11 +112,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_TZ = True
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('kr', 'Korean')
+]
 
 
 # Static files (CSS, JavaScript, Images)
