@@ -17,9 +17,9 @@ class Index(APIView):
 class DetailView(APIView):
     
     def get(self, request, pk):
-        post = Post.objects.prefetch_related('hashtag_set').get(pk=pk)
+        post = Post.objects.prefetch_related('tags').get(pk=pk)
         
-        tags = post.tag_set.all()
+        tags = post.tags.all()
         serialized_tags = TagSerializer(tags, many=True).data
 
         data = {
@@ -35,19 +35,16 @@ class Write(APIView):
     def post(self, request):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
-            # hashtag
-            tags_data = request.data.get('tags', [])
+            # hashtags
+            tags_data = serializer.validated_data.pop('tags', [])
             tags_list = []
             if tags_data:
-                if isinstance(tags_data, str):
-                    tags_data = [tags_data]
-                for tag_name in tags_data:
+                for tag_data in tags_data:
+                    tag_name = tag_data.get('name')
                     tag, created = Tag.objects.get_or_create(name=tag_name)
-                    tags_list.append(tag.pk)
+                    tags_list.append(tag)
 
-            print(tags_list)
-
-            post = serializer.save() #writer=request.user
+            post = serializer.save()  # writer=request.user
             post.tags.set(tags_list)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -65,6 +62,13 @@ class Update(APIView):
         post = Post.objects.get(pk=pk)
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
+            # 새로운 태그 추가
+            tag_names = request.data.get('tags', [])  # 태그리스트 가져오기
+
+            for tag_name in tag_names:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                post.tags.add(tag)
+
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
