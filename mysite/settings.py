@@ -11,11 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = Env()
+env_path = BASE_DIR / ".env"
+if env_path.exists():
+    with env_path.open(encoding="utf8") as f:
+        env.read_env(f, overwrite=True)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -86,6 +91,24 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# django channels layer
+if "CHANNEL_LAYER_REDIS_URL" in env:
+    channels_layer_redis = env.db_url("CHANNEL_LAYER_REDIS_URL")
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [
+                    {
+                        "host": channels_layer_redis["HOST"],
+                        "port": channels_layer_redis.get("PORT") or 6379,
+                        "password": channels_layer_redis["PASSWORD"],
+                    }
+                ]
+            }
+        }
+    }
 
 
 # Password validation
