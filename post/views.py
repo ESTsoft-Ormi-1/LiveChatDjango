@@ -72,7 +72,8 @@ class Update(APIView):
             # 태그 삭제
             tags_to_delete = request.data.get('tags_to_delete', [])
             # 선택적으로 삭제할 태그를 제거
-            post.tags.remove(*tags_to_delete)
+            if tags_to_delete:
+                post.tags.remove(*tags_to_delete)
 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
