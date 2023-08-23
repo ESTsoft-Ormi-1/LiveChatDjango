@@ -24,9 +24,9 @@ class ChatConsumer(JsonWebsocketConsumer):
             print(f"Invalid message type : {_type}")
         
         # 그룹을 통해 type="chat.message" 메세지 받으면 호출됩니다.
-        def chat_message(self, message_dict):
-            # 접속되어있는 클라이언트에게 메세지를 전달합니다.
-            self.send_json({
-                "type": "chat.message",
-                "message": message_dict["message"],
-            })
+    def chat_message(self, message_dict):
+        # 접속되어있는 클라이언트에게 메세지를 전달합니다.
+        self.send_json({
+            "type": "chat.message",
+            "message": message_dict["message"],
+        })
