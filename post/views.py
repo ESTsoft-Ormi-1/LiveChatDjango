@@ -62,12 +62,17 @@ class Update(APIView):
         post = Post.objects.get(pk=pk)
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
+            # 기존 태그 불러오기
+            tag_names = request.data.get('tags', [])
             # 새로운 태그 추가
-            tag_names = request.data.get('tags', [])  # 태그리스트 가져오기
-
             for tag_name in tag_names:
                 tag, created = Tag.objects.get_or_create(name=tag_name)
                 post.tags.add(tag)
+
+            # 태그 삭제
+            tags_to_delete = request.data.get('tags_to_delete', [])
+            # 선택적으로 삭제할 태그를 제거
+            post.tags.remove(*tags_to_delete)
 
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
