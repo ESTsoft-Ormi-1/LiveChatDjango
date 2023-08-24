@@ -203,13 +203,20 @@
         const wsUrlInput = document.querySelector("#ws_url_input");
         const wsUrl = wsUrlInput.value;
 
-        // Validate the WebSocket URL (add your own validation logic here)
-        if (wsUrl) {
-          console.log("Connecting to WebSocket:", wsUrl);
-          this.connect(wsUrl); // Connect using the provided WebSocket URL
-        } else {
-          console.log("Please provide a valid WebSocket URL.");
-        }
+        fetch(wsUrl)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            this.connect(data.chat_url);
+          })
+
+        // // Validate the WebSocket URL (add your own validation logic here)
+        // if (wsUrl) {
+        //   console.log("Connecting to WebSocket:", wsUrl);
+        //   this.connect(wsUrl); // Connect using the provided WebSocket URL
+        // } else {
+        //   console.log("Please provide a valid WebSocket URL.");
+        // }
       },
     };
 
