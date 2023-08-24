@@ -18,12 +18,15 @@ class DetailView(APIView):
     
     def get(self, request, pk):
         post = Post.objects.prefetch_related('tags').get(pk=pk)
+        serialized_post = PostSerializer(post).data
         
         tags = post.tags.all()
         serialized_tags = TagSerializer(tags, many=True).data
 
         data = {
             "post_id": pk,
+            "title": serialized_post['title'],
+            "content": serialized_post['content'], 
             "tags": serialized_tags
         }
         
@@ -62,6 +65,8 @@ class Update(APIView):
         post = Post.objects.get(pk=pk)
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
+            # 태그를 수정을 위해 기존 태그 제거
+            post.tags.clear()
             # 기존 태그 불러오기
             tag_names = request.data.get('tags', [])
             # 새로운 태그 추가
