@@ -1,5 +1,6 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import JsonWebsocketConsumer
+from .models import Room
 
 class ChatConsumer(JsonWebsocketConsumer):
     # room_name에 기반하여 그룹명을 생성
@@ -12,9 +13,9 @@ class ChatConsumer(JsonWebsocketConsumer):
     
     # 웹소켓 클라이언트가 접속을 요청할 때, 호출됩니다.
     def connect(self):
-        room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        # room_name에 기반하여 그룹명 생성.
-        self.group_name = f"chat-{room_name}"
+        room_pk = self.scope["url_route"]["kwargs"]["room_pk"]
+
+        self.group_name = Room.make_chat_group_name(room_pk=room_pk)
 
         async_to_sync(self.channel_layer.group_add)(
             self.group_name,
