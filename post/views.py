@@ -17,7 +17,15 @@ class Index(APIView):
 class DetailView(APIView):
     
     def get(self, request, pk):
-        post = Post.objects.prefetch_related('tags').get(pk=pk)
+        try:
+            post = Post.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # 조회수 증가
+        post.hit += 1
+        post.save()
+
         serialized_post = PostSerializer(post).data
         
         tags = post.tags.all()
@@ -27,7 +35,8 @@ class DetailView(APIView):
             "post_id": pk,
             "title": serialized_post['title'],
             "content": serialized_post['content'], 
-            "tags": serialized_tags
+            "tags": serialized_tags,
+            "hit": post.hit
         }
         
         return Response(data)
