@@ -30,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# settings.py
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/mysite/user/v1/profile/'
+
 
 # Application definition
 
@@ -42,8 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # thrid apps
-    'user',
     # 설치한 라이브러리들
     'rest_framework',
     'rest_framework.authtoken','rest_framework_simplejwt',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
+    'user.apps.UserConfig',
     
 ]
 
@@ -62,6 +64,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+from datetime import timedelta
+
+SIMPle_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 토큰 유효 기간 설정
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
 }
 
 REST_USE_JWT = True
