@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'post',
     'channels',
     'daphne',
     'django.contrib.admin',

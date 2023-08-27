@@ -18,5 +18,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 포스트
+    path('post/', include('post.urls')),
+    # 챗
     path('api/chat/', include('chat.urls')),
+
 ]
