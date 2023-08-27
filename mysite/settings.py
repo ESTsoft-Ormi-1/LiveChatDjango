@@ -11,11 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = Env()
+env_path = BASE_DIR / ".env"
+if env_path.exists():
+    with env_path.open(encoding="utf8") as f:
+        env.read_env(f, overwrite=True)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -41,13 +46,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     # thrid apps
 
     # local apps
-    
+    'chat',
 ]
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +72,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500','http://localhost:5500']
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -87,6 +107,24 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# django channels layer
+if "CHANNEL_LAYER_REDIS_URL" in env:
+    channels_layer_redis = env.db_url("CHANNEL_LAYER_REDIS_URL")
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [
+                    {
+                        "host": channels_layer_redis["HOST"],
+                        "port": channels_layer_redis.get("PORT") or 6379,
+                        "password": channels_layer_redis["PASSWORD"],
+                    }
+                ]
+            }
+        }
+    }
 
 
 # Password validation
