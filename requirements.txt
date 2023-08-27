@@ -27,6 +27,9 @@ requests
 # HTML 파싱 라이브러리
 beautifulsoup4
 
+# cors
+django-cors-headers
+
 # 테스트
 pytest
 pytest-django
