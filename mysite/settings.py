@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # thrid apps
 
     # local apps
-    
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+# JWT 설정
+import datetime
+from django.conf import settings
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': settings.SECRET_KEY if hasattr(settings, 'SECRET_KEY') else 'your-default-secret-key',
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
