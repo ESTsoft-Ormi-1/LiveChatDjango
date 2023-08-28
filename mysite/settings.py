@@ -11,14 +11,22 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 from datetime import timedelta
 
 AUTH_USER_MODEL = 'user.User'
 
+from environ import Env
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = Env()
+env_path = BASE_DIR / ".env"
+if env_path.exists():
+    with env_path.open(encoding="utf8") as f:
+        env.read_env(f, overwrite=True)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -37,6 +45,7 @@ LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/mysite/user/v1/profile/'
 # Application definition
 
 INSTALLED_APPS = [
+    'post',
     'channels',
     'daphne',
     'django.contrib.admin',
@@ -45,10 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 설치한 라이브러리들
+    # third app
     'rest_framework',
     'rest_framework.authtoken','rest_framework_simplejwt',
-	'rest_framework_simplejwt.token_blacklist',
+	  'rest_framework_simplejwt.token_blacklist',
     'dj_rest_auth',
     'django.contrib.sites',
     'allauth',
@@ -57,7 +66,11 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'user.apps.UserConfig',
-    
+  
+    # local app
+    'chat',
+    'post',
+    'user',
 ]
 
 REST_FRAMEWORK = {
@@ -89,6 +102,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,6 +125,10 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500','http://localhost:5500']
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -142,6 +160,24 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# django channels layer
+if "CHANNEL_LAYER_REDIS_URL" in env:
+    channels_layer_redis = env.db_url("CHANNEL_LAYER_REDIS_URL")
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [
+                    {
+                        "host": channels_layer_redis["HOST"],
+                        "port": channels_layer_redis.get("PORT") or 6379,
+                        "password": channels_layer_redis["PASSWORD"],
+                    }
+                ]
+            }
+        }
+    }
 
 
 # Password validation
