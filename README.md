@@ -3,7 +3,7 @@ Django와 Channels를 활용하여 구축한 실시간 채팅 어플리케이션
 # 프로젝트 일정 관리
 https://www.notion.so/sungbinlee/e177dd0169e24b34826149a405e5a21d?pvs=4 
 # ERD
-![cobraspace_db](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/81a4b38d-0903-4d53-be10-1902e5aaa2d8)
+![cobraspace_db](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/96beb7c9-94e1-461b-944f-1662418bbeb0)
 # 시작하기
 1. 이 레포지토리를 복사합니다.
 ```
