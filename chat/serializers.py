@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from chat.models import Room
+from chat.models import Room, Chat
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -15,3 +15,9 @@ class RoomSerializer(serializers.ModelSerializer):
             # protocol = 'ws' if request.is_secure() else 'wss'
             return f"ws://{request.get_host()}/ws/chat/{obj.id}/chat/"
         return ''
+    
+
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = '__all__'
