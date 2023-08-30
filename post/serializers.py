@@ -11,6 +11,6 @@ class PostSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
     class Meta:
         model = Post
-        fields = '__all__'
-        # exclude = ['writer'] # writer은 request.user로 받을 때
+        # fields = '__all__'
+        exclude = ['writer']
 

@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.throttling import UserRateThrottle
 from .models import Post, Tag
 from .forms import PostForm
@@ -9,6 +9,7 @@ from .serializers import PostSerializer, TagSerializer
 
 ### Post
 class Index(APIView):
+    permission_classes = [AllowAny] 
 
     def get (self, request):
         posts = Post.objects.all()
