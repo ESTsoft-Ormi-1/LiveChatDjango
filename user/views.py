@@ -11,6 +11,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
+##회원가입
 class CustomRegisterView(RegisterView):
     permission_classes = []
 
@@ -30,6 +31,8 @@ class CustomRegisterView(RegisterView):
 
         return response
 
+
+##로그인
 class CustomLoginView(LoginView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -50,6 +53,7 @@ class CustomLoginView(LoginView):
         return response
 
 
+##로그아웃
 class CustomLogoutView(LogoutView):
     permission_classes = [IsAuthenticated]
 
@@ -70,6 +74,7 @@ class TestJWTAuth(APIView):
         return Response({"message": f"안녕하세요, {user}님! JWT인증이 완료되었습니다!."})
     
 
+## 프로필 조회
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -79,8 +84,10 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
     def put(self, request, *args, **kwargs):
+        #현재 인증된 사용자의 정보를 기반으로 객체를 조회
+        #UserProfile 모델에서 user 필드가 현재 요청을 보낸 사용자와 일치하는 객체를 조회
         user_profile = get_object_or_404(UserProfile, user=request.user)
-        serializer = UserProfileSerializer(user_profile, data=request.data, partial=True)
+        serializer = UserProfileSerializer(user_profile, data=request.data, partial=True) #부분적 수정 기능
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -113,3 +120,20 @@ class FriendProfileView(APIView):
         friend_profile = get_object_or_404(UserProfile, user_id=friend_id)
         serializer = UserProfileSerializer(friend_profile)
         return Response(serializer.data)
+    
+
+class DeleteFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        email = request.data.get('email')
+        
+        try:
+            friend = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"detail": "User with this email does not exist."}, status=status.HTTP_404_NOT_FOUND)
+
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile.friends.remove(friend)  # 친구를 삭제
+
+        return Response({"message": f"{friend.email}님을 친구 목록에서 삭제했습니다."})
