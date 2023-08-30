@@ -8,6 +8,7 @@ from .models import UserProfile, User
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView
 from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class CustomRegisterView(RegisterView):
@@ -40,6 +41,11 @@ class CustomLoginView(LoginView):
             user_profile = UserProfile.objects.get(user=self.user)
             serializer = UserProfileSerializer(user_profile)
             response.data['profile'] = serializer.data
+            
+            # JWT 토큰 생성 및 응답에 추가
+            refresh = RefreshToken.for_user(self.user)
+            response.data['refresh'] = str(refresh)
+            response.data['access'] = str(refresh.access_token)
 
         return response
 
@@ -79,3 +85,5 @@ class UserProfileView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
+    
+

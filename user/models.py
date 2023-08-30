@@ -20,6 +20,7 @@ class User(AbstractUser):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    friends = models.ManyToManyField(User, related_name='friend_of', blank=True)
     contact_number = models.CharField(max_length=15, blank=True)
     status = models.CharField(max_length=20, choices=[
         ('available', 'Available'),
