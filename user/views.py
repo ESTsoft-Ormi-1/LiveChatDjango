@@ -87,3 +87,29 @@ class UserProfileView(APIView):
         return Response(serializer.errors, status=400)
     
 
+class AddFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        email = request.data.get('email')
+        print('----여기까지 들어옵니다.----')
+        
+        try:
+            friend = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"detail": "User with this email does not exist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile.friends.add(friend)  # 이 부분은 UserProfile 모델에 friends 필드가 있는 것을 전제로 함
+
+        return Response({"message": f"{friend.email}님을 친구로 추가했습니다."})
+
+
+class FriendProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, friend_id):
+        friend_profile = get_object_or_404(UserProfile, user_id=friend_id)
+        serializer = UserProfileSerializer(friend_profile)
+        return Response(serializer.data)
