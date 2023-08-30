@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.throttling import UserRateThrottle
 from .models import Post, Tag
 from .forms import PostForm
 from .serializers import PostSerializer, TagSerializer
@@ -15,7 +17,11 @@ class Index(APIView):
     
 
 class DetailView(APIView):
-    
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
+
     def get(self, request, pk):
         try:
             post = Post.objects.get(pk=pk)
@@ -43,6 +49,10 @@ class DetailView(APIView):
 
 
 class Write(APIView):
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
 
     def post(self, request):
         serializer = PostSerializer(data=request.data)
@@ -56,7 +66,7 @@ class Write(APIView):
                     tag, created = Tag.objects.get_or_create(name=tag_name)
                     tags_list.append(tag)
 
-            post = serializer.save()  # writer=request.user
+            post = serializer.save(writer=request.user) # writer=request.user
             post.tags.set(tags_list)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -64,6 +74,10 @@ class Write(APIView):
     
 
 class Update(APIView):
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
     
     def get(self, request, pk):
         post = Post.objects.get(pk=pk)
@@ -95,7 +109,7 @@ class Update(APIView):
 
 
 class Delete(APIView):
-    
+
     def post(self, request, pk):
         post = Post.objects.get(pk=pk)
         post.delete()

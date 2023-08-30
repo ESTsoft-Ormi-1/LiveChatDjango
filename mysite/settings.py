@@ -198,6 +198,23 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+#REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_THROTTLE_CLASS': {
+        'rest_framework.throttling.UserRateThrottle'
+    },
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '5/day',
+    },
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
