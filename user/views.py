@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserProfileSerializer
 from .models import UserProfile, User
 from dj_rest_auth.registration.views import RegisterView
-from dj_rest_auth.views import LoginView
+from dj_rest_auth.views import LoginView, LogoutView
 from rest_framework.permissions import AllowAny
 
 
@@ -44,6 +44,18 @@ class CustomLoginView(LoginView):
         return response
 
 
+class CustomLogoutView(LogoutView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        response.data = {
+            "message": "로그아웃이 완료되었습니다."
+        }
+        return response
+
+
+#Test Code
 class TestJWTAuth(APIView):
     permission_classes = [IsAuthenticated]  # 이 view를 호출하기 위해서는 인증이 필요하다는 뜻 입니다(DRF 자체에서 아무나 들어올 수 없도록 막아주는 기본 기능입니다.)
 
