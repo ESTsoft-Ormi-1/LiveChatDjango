@@ -83,7 +83,7 @@ from datetime import timedelta
 SIMPLE_JWT = {
     #'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),  # 이 설정을 사용하려면 해당 줄을 주석 처리하세요.
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
 }
 
 REST_USE_JWT = True

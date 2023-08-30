@@ -78,13 +78,13 @@ class UserProfileView(APIView):
         serializer = UserProfileSerializer(user_profile)
         return Response(serializer.data)
 
-    def put(self, request):
+    def put(self, request, *args, **kwargs):
         user_profile = get_object_or_404(UserProfile, user=request.user)
-        serializer = UserProfileSerializer(user_profile, data=request.data)
+        serializer = UserProfileSerializer(user_profile, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
 class AddFriendView(APIView):
@@ -92,7 +92,7 @@ class AddFriendView(APIView):
 
     def post(self, request):
         email = request.data.get('email')
-        print('----여기까지 들어옵니다.----')
+        #print('----여기까지 들어옵니다.----')#test
         
         try:
             friend = User.objects.get(email=email)
