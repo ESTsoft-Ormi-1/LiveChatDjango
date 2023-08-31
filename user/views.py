@@ -3,12 +3,14 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .serializers import UserProfileSerializer
+from .serializers import UserProfileSerializer, UserSerializer, UserFriendSerializer
 from .models import UserProfile, User
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.db.models import Q
+from django.contrib.auth import authenticate
 
 
 ##회원가입
@@ -94,6 +96,7 @@ class UserProfileView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+##친구추가
 class AddFriendView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -113,6 +116,21 @@ class AddFriendView(APIView):
         return Response({"message": f"{friend.email}님을 친구로 추가했습니다."})
 
 
+## 친구 목록 조회
+class UserFriendView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # 현재 로그인한 사용자의 UserProfile 인스턴스를 가져옵니다.
+        user_profile = get_object_or_404(UserProfile, user=request.user)
+        # 해당 사용자의 친구 목록을 가져옵니다.
+        friends = user_profile.friends.all()
+        # 친구 목록을 serialize 합니다.
+        serializer = UserFriendSerializer(friends, many=True)
+        return Response(serializer.data)
+
+
+##친구 프로필 조회
 class FriendProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -122,6 +140,7 @@ class FriendProfileView(APIView):
         return Response(serializer.data)
     
 
+##친구삭제
 class DeleteFriendView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -137,3 +156,35 @@ class DeleteFriendView(APIView):
         user_profile.friends.remove(friend)  # 친구를 삭제
 
         return Response({"message": f"{friend.email}님을 친구 목록에서 삭제했습니다."})
+    
+
+## 친구 검색기능
+class SearchFriendsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        keyword = request.query_params.get('keyword', '')
+
+        # 이메일에 키워드가 포함된 사용자들 검색
+        users = User.objects.filter(email__icontains=keyword)
+        serializer = UserSerializer(users, many=True)
+        
+        return Response(serializer.data)
+
+
+## 계정 삭제 기능
+'''class DeleteAccountView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        user = request.user
+        password = request.data.get('password')
+        
+        # 인증 프로세스
+        auth_user = authenticate(email=user.email, password=password)
+        if not auth_user:
+            return Response({"detail": "비밀번호가 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # 사용자 삭제
+        user.delete()
+        return Response({"message": "계정이 성공적으로 삭제되었습니다."})'''

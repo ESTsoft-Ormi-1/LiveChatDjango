@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .views import TestJWTAuth
-from .views import UserProfileView, CustomRegisterView, CustomLoginView, CustomLogoutView, AddFriendView, FriendProfileView, DeleteFriendView
+from .views import UserProfileView, CustomRegisterView, CustomLoginView, CustomLogoutView, AddFriendView, FriendProfileView, DeleteFriendView, SearchFriendsView,  UserFriendView
 
 urlpatterns = [
     #path('', include('dj_rest_auth.urls')),
@@ -12,7 +12,9 @@ urlpatterns = [
     path('test-jwt-auth/', TestJWTAuth.as_view(), name='test_jwt_auth'), #JWT 토큰 인증 URL
     path('profile/', UserProfileView.as_view(), name='user-profile'), #프로필 조회
     path('add-friend/', AddFriendView.as_view(), name='add_friend'),  # 친구 추가 뷰
+    path('friends/', UserFriendView.as_view(), name='friends-list'), #친구 목록 조회
     path('friend-profile/<int:friend_id>/', FriendProfileView.as_view(), name='friend_profile'),  # 친구 프로필 조회 뷰
-    path('delete-friend/', DeleteFriendView.as_view(), name='delete_friend'),
-
+    path('delete-friend/', DeleteFriendView.as_view(), name='delete_friend'), # 친구 삭제
+    path('search-friends/', SearchFriendsView.as_view(), name='search_friends'), #친구 검색
+    #path('delete-account/', DeleteAccountView.as_view(), name='delete_account'), 
 ]
