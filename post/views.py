@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.throttling import UserRateThrottle
 from .models import Post, Tag
 from .forms import PostForm
-from .serializers import PostSerializer, TagSerializer
+from .serializers import PostSerializer, TagSerializer, WriterSerializer
 
 ### Post
 class Index(APIView):
@@ -34,6 +34,7 @@ class DetailView(APIView):
         post.save()
 
         serialized_post = PostSerializer(post).data
+        serialized_writer = WriterSerializer(request.user).data
         
         tags = post.tags.all()
         serialized_tags = TagSerializer(tags, many=True).data
@@ -42,6 +43,7 @@ class DetailView(APIView):
             "post_id": pk,
             "title": serialized_post['title'],
             "content": serialized_post['content'], 
+            "writer": serialized_writer,
             "tags": serialized_tags,
             "hit": post.hit
         }
