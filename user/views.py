@@ -11,6 +11,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import check_password
 
 
 ##회원가입
@@ -37,9 +38,23 @@ class CustomRegisterView(RegisterView):
 ##로그인
 class CustomLoginView(LoginView):
     def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
+        email = request.data['email']
+        password = request.data['password']
 
-        if response.status_code == status.HTTP_200_OK:
+        response = super().post(request, *args, **kwargs)
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            return Response(
+                {"message": "존재하지 않는 아이디입니다."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        # 비밀번호가 틀린 경우,
+        if not check_password(password, user.password):
+            return Response(
+                {"message": "비밀번호가 틀렸습니다."}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # user가 맞다면,
+        if user is not None:
             user_email = self.user.email
             response.data['message'] = f"{user_email}님 환영합니다."
 
@@ -64,6 +79,7 @@ class CustomLogoutView(LogoutView):
         response.data = {
             "message": "로그아웃이 완료되었습니다."
         }
+        response.delete_cookie('jwt')
         return response
 
 
