@@ -1,12 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.throttling import UserRateThrottle
 from .models import Post, Tag
 from .forms import PostForm
-from .serializers import PostSerializer, TagSerializer
+from .serializers import PostSerializer, TagSerializer, WriterSerializer
 
 ### Post
 class Index(APIView):
+    permission_classes = [AllowAny] 
 
     def get (self, request):
         posts = Post.objects.all()
@@ -15,7 +18,11 @@ class Index(APIView):
     
 
 class DetailView(APIView):
-    
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
+
     def get(self, request, pk):
         try:
             post = Post.objects.get(pk=pk)
@@ -27,6 +34,7 @@ class DetailView(APIView):
         post.save()
 
         serialized_post = PostSerializer(post).data
+        serialized_writer = WriterSerializer(request.user).data
         
         tags = post.tags.all()
         serialized_tags = TagSerializer(tags, many=True).data
@@ -35,6 +43,7 @@ class DetailView(APIView):
             "post_id": pk,
             "title": serialized_post['title'],
             "content": serialized_post['content'], 
+            "writer": serialized_writer,
             "tags": serialized_tags,
             "hit": post.hit
         }
@@ -43,9 +52,14 @@ class DetailView(APIView):
 
 
 class Write(APIView):
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
 
     def post(self, request):
         serializer = PostSerializer(data=request.data)
+        
         if serializer.is_valid():
             # hashtags
             tags_data = serializer.validated_data.pop('tags', [])
@@ -56,7 +70,7 @@ class Write(APIView):
                     tag, created = Tag.objects.get_or_create(name=tag_name)
                     tags_list.append(tag)
 
-            post = serializer.save()  # writer=request.user
+            post = serializer.save(writer=request.user)
             post.tags.set(tags_list)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -64,6 +78,10 @@ class Write(APIView):
     
 
 class Update(APIView):
+    # 인증된 사용자만 접근 가능
+    permission_classes = [IsAuthenticated] 
+    # 사용자 요청 속도 제한 설정
+    throttle_classes = [UserRateThrottle]
     
     def get(self, request, pk):
         post = Post.objects.get(pk=pk)
@@ -72,7 +90,7 @@ class Update(APIView):
 
     def post(self, request, pk):
         post = Post.objects.get(pk=pk)
-        serializer = PostSerializer(post, data=request.data)
+        serializer = PostSerializer(post, data=request.data, context={'request': request})
         if serializer.is_valid():
             # 태그를 수정을 위해 기존 태그 제거
             post.tags.clear()
@@ -95,7 +113,7 @@ class Update(APIView):
 
 
 class Delete(APIView):
-    
+
     def post(self, request, pk):
         post = Post.objects.get(pk=pk)
         post.delete()

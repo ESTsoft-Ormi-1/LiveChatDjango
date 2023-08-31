@@ -18,9 +18,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 유저
+    path('mysite/user/v1/', include('user.urls')),
     # 포스트
     path('post/', include('post.urls')),
     # 챗
     path('api/chat/', include('chat.urls')),
-
 ]

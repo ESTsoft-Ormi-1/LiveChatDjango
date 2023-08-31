@@ -35,3 +35,11 @@ pytest
 pytest-django
 pytest-testdox
 pytest-asyncio
+
+# 인증
+djangorestframework-simplejwt
+dj-rest-auth
+django-allauth~=0.54.0
+
+# 파일
+pillow
