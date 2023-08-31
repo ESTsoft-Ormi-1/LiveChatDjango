@@ -11,7 +11,7 @@ class Room(models.Model):
     @property
     def chat_group_name(self):
         return self.make_chat_group_name(room=self)
-    
+
     @staticmethod
     def make_chat_group_name(room=None, room_pk=None):
         return "chat-%s" % (room_pk or room.pk)
@@ -25,6 +25,14 @@ class Chat(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     message_type = models.CharField(max_length=45, null=True)
-
+    
     def __str__(self):
         return self.message
+
+
+class RoomUser(models.Model):
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE)
+    joined_at = models.DateTimeField(auto_now=True)
