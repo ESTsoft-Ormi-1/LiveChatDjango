@@ -12,6 +12,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 
 ##회원가입
@@ -43,31 +45,34 @@ class CustomLoginView(LoginView):
 
         response = super().post(request, *args, **kwargs)
         user = User.objects.filter(email=email).first()
+
         if user is None:
             return Response(
                 {"message": "존재하지 않는 아이디입니다."}, status=status.HTTP_400_BAD_REQUEST
             )
-        # 비밀번호가 틀린 경우,
+
         if not check_password(password, user.password):
             return Response(
                 {"message": "비밀번호가 틀렸습니다."}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        # user가 맞다면,
         if user is not None:
+            token = TokenObtainPairSerializer.get_token(user)
             user_email = self.user.email
             response.data['message'] = f"{user_email}님 환영합니다."
 
             user_profile = UserProfile.objects.get(user=self.user)
             serializer = UserProfileSerializer(user_profile)
             response.data['profile'] = serializer.data
-            
+            refresh_token = str(token) # refresh 토큰 문자열화
+            access_token = str(token.access_token) # access 토큰 문자열화
             # JWT 토큰 생성 및 응답에 추가
-            refresh = RefreshToken.for_user(self.user)
-            response.data['refresh'] = str(refresh)
-            response.data['access'] = str(refresh.access_token)
+            response.data['refresh'] = refresh_token
+            response.data['access'] = access_token
 
-        return response
+            response.set_cookie("access_token", access_token, httponly=True)
+            response.set_cookie("refresh_token", refresh_token, httponly=True)
+            return response
 
 
 ##로그아웃
