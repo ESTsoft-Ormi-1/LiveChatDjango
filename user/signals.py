@@ -7,3 +7,4 @@ from .models import UserProfile
 def create_user_profile(sender, request, user, **kwargs):
     UserProfile.objects.create(user=user)
     # 회원가입 시에 프로필을 생성하는 시그널 리시버를 정의
+

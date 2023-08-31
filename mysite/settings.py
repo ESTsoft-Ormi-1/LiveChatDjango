@@ -80,11 +80,10 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 
-SIMPle_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 토큰 유효 기간 설정
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+SIMPLE_JWT = {
+    #'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
 }
 
 REST_USE_JWT = True
