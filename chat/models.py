@@ -25,6 +25,9 @@ class Chat(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     message_type = models.CharField(max_length=45, null=True)
+    
+    def __str__(self):
+        return self.message
 
 
 class RoomUser(models.Model):
@@ -32,8 +35,4 @@ class RoomUser(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     joined_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.message
