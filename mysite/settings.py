@@ -45,7 +45,6 @@ LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/mysite/user/v1/profile/'
 # Application definition
 
 INSTALLED_APPS = [
-    'post',
     'channels',
     'daphne',
     'django.contrib.admin',
@@ -54,10 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	
     # third app
     'rest_framework',
     'rest_framework.authtoken','rest_framework_simplejwt',
-	  'rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt.token_blacklist',
     'dj_rest_auth',
     'django.contrib.sites',
     'allauth',
@@ -65,12 +65,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'corsheaders',
-    'user.apps.UserConfig',
   
     # local app
     'chat',
     'post',
-    'user',
+    'user.apps.UserConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -81,11 +80,10 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 
-SIMPle_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 토큰 유효 기간 설정
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+SIMPLE_JWT = {
+    #'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
 }
 
 REST_USE_JWT = True
