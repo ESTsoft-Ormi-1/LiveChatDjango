@@ -14,4 +14,9 @@ urlpatterns = [
     path("detail/<int:pk>/edit/", views.Update.as_view(), name='edit'), #/post/detail/pk/edit/
     # 글 삭제
     path("detail/<int:pk>/delete/", views.Delete.as_view(), name='delete'), #/post/detail/pk/delete/
+    # 카테고리
+    path('categories/', views.CategoryList.as_view(), name='category_list'),    
+    # 검색 글 목록
+    path('posts/', views.PostList.as_view(), name='post_list'),
+
 ]

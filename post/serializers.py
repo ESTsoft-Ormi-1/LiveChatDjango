@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Tag
-from user.models import User
+from .models import Post, Tag, Category
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +28,8 @@ class WriterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email',)
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

@@ -10,10 +10,19 @@ class Tag(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=45)
+    
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Tag, blank=True)
@@ -27,3 +36,4 @@ class Post(models.Model):
         self.hit += 1
         self.save()
         return self.hit
+
