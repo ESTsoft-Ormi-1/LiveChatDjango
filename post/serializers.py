@@ -16,9 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
         # exclude = ['writer']
 
 class WriterSerializer(serializers.ModelSerializer):
-    email = None
-
     class Meta:
         model = User
-        exclude = ('email',)
+        fields = ('email',)
 

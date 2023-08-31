@@ -69,7 +69,7 @@ class Write(APIView):
                     tag, created = Tag.objects.get_or_create(name=tag_name)
                     tags_list.append(tag)
 
-            post = serializer.save(writer=request.user) # writer=request.user
+            post = serializer.save(writer=request.user)
             post.tags.set(tags_list)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
