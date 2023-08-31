@@ -59,6 +59,7 @@ class Write(APIView):
 
     def post(self, request):
         serializer = PostSerializer(data=request.data)
+        
         if serializer.is_valid():
             # hashtags
             tags_data = serializer.validated_data.pop('tags', [])
@@ -89,7 +90,7 @@ class Update(APIView):
 
     def post(self, request, pk):
         post = Post.objects.get(pk=pk)
-        serializer = PostSerializer(post, data=request.data)
+        serializer = PostSerializer(post, data=request.data, context={'request': request})
         if serializer.is_valid():
             # 태그를 수정을 위해 기존 태그 제거
             post.tags.clear()
