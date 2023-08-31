@@ -136,8 +136,15 @@ class FriendProfileView(APIView):
 
     def get(self, request, friend_id):
         friend_profile = get_object_or_404(UserProfile, user_id=friend_id)
+
+        # 해당 사용자의 프로필이 비공개이면서 요청한 사용자와 친구 관계가 아닐 경우
+        if friend_profile.is_private and request.user not in friend_profile.friends.all():
+            return Response({"message": "This account is private."}, status=status.HTTP_403_FORBIDDEN)
+
         serializer = UserProfileSerializer(friend_profile)
         return Response(serializer.data)
+
+
     
 
 ##친구삭제
@@ -171,20 +178,3 @@ class SearchFriendsView(APIView):
         
         return Response(serializer.data)
 
-
-## 계정 삭제 기능
-'''class DeleteAccountView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def delete(self, request):
-        user = request.user
-        password = request.data.get('password')
-        
-        # 인증 프로세스
-        auth_user = authenticate(email=user.email, password=password)
-        if not auth_user:
-            return Response({"detail": "비밀번호가 올바르지 않습니다."}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # 사용자 삭제
-        user.delete()
-        return Response({"message": "계정이 성공적으로 삭제되었습니다."})'''
