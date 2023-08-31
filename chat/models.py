@@ -30,9 +30,9 @@ class Chat(models.Model):
         return self.message
 
 
-class RoomUser(models.Model):
+class RoomMember(models.Model):
     room = models.ForeignKey("Room", on_delete=models.CASCADE)
-    user = models.ForeignKey(
+    member = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
-    joined_at = models.DateTimeField(auto_now=True)
+    channel_names = models.JSONField(default=set)
