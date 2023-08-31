@@ -15,7 +15,7 @@ class Room(models.Model):
     @staticmethod
     def make_chat_group_name(room=None, room_pk=None):
         return "chat-%s" % (room_pk or room.pk)
-    
+
 
 class Chat(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
