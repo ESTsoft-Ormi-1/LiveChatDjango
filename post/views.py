@@ -1,9 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Post, Tag
+from rest_framework import filters
+from .models import Post, Tag, Category
 from .forms import PostForm
-from .serializers import PostSerializer, TagSerializer
+from .serializers import PostSerializer, TagSerializer, CategorySerializer
+from django.db.models import Q
+
+
+
 
 ### Post
 class Index(APIView):
@@ -13,6 +18,7 @@ class Index(APIView):
         serialized_posts = PostSerializer(posts, many=True)
         return Response(serialized_posts.data)
     
+
 
 class DetailView(APIView):
     
@@ -101,3 +107,46 @@ class Delete(APIView):
         post.delete()
         return Response({ 'msg': 'Post deleted' }, status=status.HTTP_204_NO_CONTENT)
     
+##카테고리
+class CategoryList(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+##검색기능
+class PostList(APIView):
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'content', 'category__name', 'tags__name']  # 태그 이름도 검색 가능하게 추가
+
+    def get(self, request):
+        search_query = request.GET.get('search', '')
+        posts = Post.objects.filter(
+            Q(title__icontains=search_query) |
+            Q(content__icontains=search_query) |
+            Q(category__name__icontains=search_query) | # 카테고리 이름 검색 조건 추가
+            Q(tags__name__icontains=search_query)  # 태그 이름 검색 조건 추가
+        )
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            category_id = request.data.get('category')  # 요청에서 카테고리 정보 가져오기
+            tags = request.data.get('tags')  # 요청에서 태그 정보 가져오기
+            category = Category.objects.get(id=category_id)
+            post = serializer.save(category=category)
+            
+            if tags:
+                post.tags.set(tags)  # 태그 정보 저장
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

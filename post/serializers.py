@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Tag
+from .models import Post, Tag, Category
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,3 +14,8 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ['writer'] # writer은 request.user로 받을 때
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
