@@ -5,12 +5,12 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class RoomViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated] 
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
 
 class ChatCreateView(generics.CreateAPIView):
-    # permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated] 
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer

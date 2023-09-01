@@ -8,7 +8,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
+    nickname = models.CharField(max_length=20)
     objects = UserManager()
 
     def __str__(self):

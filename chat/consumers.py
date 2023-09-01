@@ -10,19 +10,36 @@ class ChatConsumer(JsonWebsocketConsumer):
         # 인스턴스 변수는 생성자 내에서 정의.
         # 인스턴스 변수 group_name 추가
         self.group_name = ""
+        self.room = None
     
     # 웹소켓 클라이언트가 접속을 요청할 때, 호출됩니다.
     def connect(self):
+        user = self.scope["user"]
         room_pk = self.scope["url_route"]["kwargs"]["room_pk"]
 
-        self.group_name = Room.make_chat_group_name(room_pk=room_pk)
+        try:
+            self.room = Room.objects.get(pk=room_pk)
+        except Room.DoesNotExist:
+            self.close()
+        else:
+            self.group_name = self.room.chat_group_name
 
-        async_to_sync(self.channel_layer.group_add)(
-            self.group_name,
-            self.channel_name,
-        )
-        # 본 웹소켓 접속을 허용.
-        self.accept()
+            is_new_join = self.room.user_join(self.channel_name, user)
+            if is_new_join:
+                async_to_sync(self.channel_layer.group_send)(
+                    self.group_name,
+                    {
+                        "type": "chat.user.join",
+                        "username": user.nickname,
+                    }
+                )
+
+            async_to_sync(self.channel_layer.group_add)(
+                self.group_name,
+                self.channel_name,
+            )
+            # 본 웹소켓 접속을 허용.
+            self.accept()
 
     # 웹소켓 클라이언트와의 접속이 끊겼을 때, 호출 됩니다.
     def disconnect(self, code):
@@ -31,6 +48,19 @@ class ChatConsumer(JsonWebsocketConsumer):
                 self.group_name,
                 self.channel_name,
             )
+
+        user = self.scope["user"]
+
+        if self.room is not None:
+            is_last_leave = self.room.user_leave(self.channel_name, user)
+            if is_last_leave:
+                async_to_sync(self.channel_layer.group_send)(
+                    self.group_name,
+                    {
+                        "type": "chat.user.leave",
+                        "username": user.nickname,
+                    }
+                )
     
     # 단일 클라이언트로 메세지를 받으면 호출
     def receive_json(self, content, **kwargs):
@@ -49,6 +79,18 @@ class ChatConsumer(JsonWebsocketConsumer):
         else:
             print(f"Invalid message type : {_type}")
         
+    def chat_user_join(self, message_dict):
+        self.send_json({
+            "type": "chat.user.join",
+            "username": message_dict["uesrname"]
+        })
+
+    def chat_user_leave(self, message_dict):
+        self.send_json({
+            "type": "chat.user.leave",
+            "username": message_dict["uesrname"]
+        })
+
         # 그룹을 통해 type="chat.message" 메세지 받으면 호출됩니다.
     def chat_message(self, message_dict):
         # 접속되어있는 클라이언트에게 메세지를 전달합니다.
