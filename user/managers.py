@@ -2,11 +2,12 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, nickname, password, **extra_fields):
         if not email:
             raise ValueError(_('The Email must be set'))
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        print(nickname)
+        user = self.model(email=email, nickname=nickname **extra_fields)
         user.set_password(password)
         user.save()
         return user
