@@ -8,17 +8,17 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    nickname = models.CharField(max_length=20)
     objects = UserManager()
 
     def __str__(self):
         return self.email
-    
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     friends = models.ManyToManyField(User, related_name='friend_of', blank=True)
+    nickname = models.CharField(max_length=20)
     is_private = models.BooleanField(default=False)
     contact_number = models.CharField(max_length=15, blank=True)
     status = models.CharField(max_length=20, choices=[

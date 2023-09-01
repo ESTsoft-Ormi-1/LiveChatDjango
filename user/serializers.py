@@ -22,7 +22,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'profile_picture', 'contact_number', 'status', 'user', 'friends_emails', 'is_private']
+        fields = ['id', 'profile_picture', 'contact_number', 'status', 'user', 'friends_emails', 'is_private', 'nickname']
 
     def get_friends_emails(self, obj):
         # friends 필드에 대해 email을 가져오는 로직을 작성합니다.
