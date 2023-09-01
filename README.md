@@ -39,7 +39,6 @@ python manage.py migrate
 
 python manage.py runserver
 
-````
 # Fork 하기
 # SRS
 # API 문서화
@@ -104,8 +103,3 @@ python manage.py runserver
 # 각종 사용한 링크, 피그마?
 
 # 후기
-
-```
-
-```
-````
