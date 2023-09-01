@@ -27,8 +27,19 @@ requests
 # HTML 파싱 라이브러리
 beautifulsoup4
 
+# cors
+django-cors-headers
+
 # 테스트
 pytest
 pytest-django
 pytest-testdox
 pytest-asyncio
+
+# 인증
+djangorestframework-simplejwt
+dj-rest-auth
+django-allauth~=0.54.0
+
+# 파일
+pillow
