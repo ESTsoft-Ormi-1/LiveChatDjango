@@ -80,15 +80,17 @@ class CustomLogoutView(LogoutView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        refresh_token = request.data["refresh_token"]
-        token = RefreshToken(refresh_token)
+        # try:
         response = super().post(request, *args, **kwargs)
         response.data = {
             "message": "로그아웃이 완료되었습니다."
         }
-        response.delete_cookie('jwt')
-        token.blacklist()
+        response.delete_cookie("refresh_token")
+        # token.blacklist()
         return response
+        # except Exception as e:
+        #     return Response({"message": "로그아웃 중 오류가 발생했습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 #Test Code
