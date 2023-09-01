@@ -96,6 +96,7 @@ python manage.py runserver
 }
 ```
 
+
 # UI(구현 동작)
 
 # 개발 이슈
