@@ -51,7 +51,7 @@ class CustomLoginView(LoginView):
             refresh = RefreshToken.for_user(self.user)
             response.data['refresh'] = str(refresh)
             response.data['access'] = str(refresh.access_token)
-
+        
         return response
 
 
@@ -109,7 +109,6 @@ class AddFriendView(APIView):
         except User.DoesNotExist:
             return Response({"detail": "User with this email does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
-
         user_profile = UserProfile.objects.get(user=request.user)
         user_profile.friends.add(friend)  # 이 부분은 UserProfile 모델에 friends 필드가 있는 것을 전제로 함
 
@@ -145,8 +144,6 @@ class FriendProfileView(APIView):
         return Response(serializer.data)
 
 
-    
-
 ##친구삭제
 class DeleteFriendView(APIView):
     permission_classes = [IsAuthenticated]
@@ -160,6 +157,11 @@ class DeleteFriendView(APIView):
             return Response({"detail": "User with this email does not exist."}, status=status.HTTP_404_NOT_FOUND)
 
         user_profile = UserProfile.objects.get(user=request.user)
+        
+        # 친구 목록에 해당 사용자가 있는지 확인
+        if friend not in user_profile.friends.all():
+            return Response({"detail": f"{friend.email}님은 친구 목록에 없습니다."}, status=status.HTTP_400_BAD_REQUEST)
+
         user_profile.friends.remove(friend)  # 친구를 삭제
 
         return Response({"message": f"{friend.email}님을 친구 목록에서 삭제했습니다."})
