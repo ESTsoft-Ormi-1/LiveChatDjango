@@ -9,6 +9,7 @@ from .forms import PostForm
 from chat.models import Room
 from chat.serializers import RoomSerializer
 from .serializers import PostSerializer, TagSerializer, CategorySerializer, WriterSerializer
+from user.serializers import UserSerializer
 from django.db.models import Q
 
 
@@ -53,8 +54,8 @@ class DetailView(APIView):
             "writer": serialized_writer,
             "tags": serialized_tags,
             "hit": post.hit,
-            "room_data": RoomSerializer(room, context={'request': request}).data
-
+            "room_data": RoomSerializer(room, context={'request': request}).data,
+            "current_user": UserSerializer(request.user).data
         }
         
         return Response(data)
@@ -65,7 +66,7 @@ class Write(APIView):
     permission_classes = [IsAuthenticated] 
     # 사용자 요청 속도 제한 설정
     throttle_classes = [UserRateThrottle]
-
+    
     def post(self, request):
         serializer = PostSerializer(data=request.data)
         
