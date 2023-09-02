@@ -9,6 +9,8 @@ class TagSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
+    writer_nickname = serializers.CharField(source='writer.userprofile.nickname', read_only=True)
+    writer_profile_picture = serializers.ImageField(source='writer.userprofile.profile_picture', read_only=True)
     class Meta:
         model = Post
         fields = '__all__'
@@ -24,9 +26,17 @@ class PostSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 class WriterSerializer(serializers.ModelSerializer):
+    nickname = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('email', 'nickname')
+
+    def get_nickname(self, obj):
+        try:
+            return obj.userprofile.nickname
+        except User.UserProfile.DoesNotExist:
+            return None
 
 
 class CategorySerializer(serializers.ModelSerializer):

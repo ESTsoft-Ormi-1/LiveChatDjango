@@ -81,8 +81,8 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    #'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=365),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), 
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
 }
 
@@ -112,7 +112,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",  # 여기에 프론트엔드 도메인을 추가하세요.
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1:8000",  # 여기에 프론트엔드 도메인을 추가하세요.
 ]
 
 CORS_ALLOW_METHODS = [
@@ -124,7 +125,7 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500','http://localhost:5500']
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500','http://localhost:5500', 'http://127.0.0.1:8000']
 CORS_ALLOW_CREDENTIALS = True
 
 

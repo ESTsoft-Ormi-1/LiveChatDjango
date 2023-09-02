@@ -20,5 +20,5 @@ class RoomSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if request:
             # protocol = 'ws' if request.is_secure() else 'wss'
-            return f"ws://{request.get_host()}/ws/chat/{obj.id}/chat/"
+            return f"{request.get_host()}/ws/chat/{obj.id}/chat/"
         return ''
