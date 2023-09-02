@@ -25,11 +25,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    friends_emails = serializers.SerializerMethodField()  # 친구 id가 아닌 email을 가져오도록 직렬화합니다
+    friends_emails = serializers.SerializerMethodField()  # 친구 id가 아닌 
 
     class Meta:
         model = UserProfile
-        fields = ['id', 'profile_picture', 'contact_number', 'status', 'user', 'friends_emails', 'is_private', 'nickname']
+        fields = ['id', 'profile_picture', 'contact_number', 'status', 'user', 'friends_emails', 'is_private', 'nickname',]
 
     def get_friends_emails(self, obj):
         # friends 필드에 대해 email을 가져오는 로직을 작성합니다.
