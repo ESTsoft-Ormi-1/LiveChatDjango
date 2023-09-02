@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from mysite.json_extended import ExtendedJSONEncoder, ExtendedJSONDecoder
-
+from post.models import Post
 
 class OnlineUserMixin(models.Model):
 
@@ -61,6 +61,7 @@ class Room(OnlineUserMixin, models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
 
     @property
     def chat_group_name(self):
