@@ -38,9 +38,97 @@
 |-----|  
 | <video src=https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/2af01f92-833b-4941-9ea8-2f934bf797b9>  |
 
-# Fork 하기
-# SRS
-# API 문서화
+## Fork 하기
+## SRS
+
+
+## 1. Chat
+### 1.1 메시지 관리
+#### 1.1.1 메세지 생성
+* URL: `/api/chat/message/`
+* Method: POST
+* Description: 새로운 채팅 메세지를 생성합니다.
+
+**요청 예시**:
+```json
+{
+  "type": "chat.message",
+  "message": "Hello, World!"
+}
+```
+### 1.2 방 관리
+#### 1.2.1 방 생성
+* URL: `/api/chat/room/`
+* Method: POST
+* Description: 새로운 대화방을 생성합니다.
+
+**요청 예시**:
+```json
+{
+  "name": "Chat Room"
+}
+```
+#### 1.2.2 방 조회
+* URL: `/api/chat/room/{room_id}/`
+* Method: POST
+* Description: 특정 대화방을 조회합니다.
+요청 파라미터: `{room_id}` - 조회할 방의 고유 식별자
+
+**요청 예시**:
+```json
+{
+  "id": 42,
+  "name": "Chat Room",
+  "chat_url": "/ws/chat/42/chat/"
+}
+```
+### 1.3 Websocket 
+#### 1.3.1 Websocket 연결
+* URL: `wss://example/ws/chat/{room_id}/chat/`
+* Description: 클라이언트는 이 엔드포인트를 통해 웹소켓 서버에 연결할 수 있습니다.
+#### 1.3.2 메시지 교환
+##### 메시지 유형
+WebSocket 연결을 통해 주고받는 메시지는 다음과 같은 유형을 가질 수 있습니다:
+* `chat.message`: 일반 채팅 메시지
+* `chat.user.join`: 사용자가 채팅방에 입장한 이벤트
+* `chat.user.leave`: 사용자가 채팅방에서 퇴장한 이벤트
+##### 메시지 전송
+클라이언트는 JSON 형식의 메시지를 WebSocket 서버로 전송할 수 있습니다. 메시지의 형식은 다음과 같습니다:
+```json
+{
+  "type": "chat.message",
+  "message": "Hello, World!"
+}
+```
+##### 메시지 수신
+WebSocket 서버는 다른 클라이언트로부터 수신한 메시지를 현재 연결된 클라이언트에게 전달합니다.
+```json
+{
+  "type": "chat.message",
+  "message": "Hello, World!",
+  "sender": "user@example.com",
+  "nickname": "John",
+  "profile_picture_url": "https://example.com/profile.jpg"
+}
+```
+##### 이벤트 처리
+클라이언트는 chat.user.join 및 chat.user.leave 이벤트를 수신하여 사용자의 입장 및 퇴장을 처리할 수 있습니다.
+```json
+{
+  "type": "chat.user.join",
+  "username": "John"
+}
+```
+##### 오류 처리
+WebSocket API에서 오류가 발생할 경우, 클라이언트는 적절한 오류 메시지를 수신합니다. 오류 메시지의 형식은 다음과 같습니다:
+```json
+{
+  "error_type": "invalid_request",
+  "message": "Invalid message format."
+}
+```
+
+
 # API 앤드포인트(요청, 응답)
 ## 1. chat
 ```각자 api 나눠서 작성```
