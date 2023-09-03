@@ -38,38 +38,6 @@
 |-----|  
 | <video src=https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/2af01f92-833b-4941-9ea8-2f934bf797b9>  |
 
-
-
-
-
-```
-2. 복사한 폴더로 들어가기
-```
-
-cd LiveChatDjango
-
-```
-3. 가상환경 생성
-```
-
-python -m venv venv
-source venv/bin/activate # Windows에서는 "venv\Scripts\activate" 실행
-pip install -r requirements.txt
-
-```
-
-4. migrate
-```
-
-python manage.py migrate
-
-```
-
-5. 개발 서버 실행
-```
-
-python manage.py runserver
-
 # Fork 하기
 # SRS
 # API 문서화
