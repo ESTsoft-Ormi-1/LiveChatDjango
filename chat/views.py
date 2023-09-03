@@ -11,12 +11,6 @@ class RoomViewSet(viewsets.ModelViewSet):
 
 
 class ChatCreateView(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated] 
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
-
-
-class ChatCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer

@@ -42,7 +42,7 @@ class DetailView(APIView):
         post.save()
 
         serialized_post = PostSerializer(post).data
-        serialized_writer = WriterSerializer(request.user).data
+        serialized_writer = WriterSerializer(post.writer).data
         
         tags = post.tags.all()
         serialized_tags = TagSerializer(tags, many=True).data
@@ -69,7 +69,6 @@ class Write(APIView):
     
     def post(self, request):
         serializer = PostSerializer(data=request.data)
-        
         if serializer.is_valid():
             post_data = serializer.validated_data
             room_owner = request.user
@@ -89,7 +88,7 @@ class Write(APIView):
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 class Update(APIView):
     # 인증된 사용자만 접근 가능
