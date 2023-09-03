@@ -16,6 +16,31 @@
 
 코브라 스페이스는 코딩과 프로그래밍 분야에서 아이디어를 공유하고 협력하는 공간을 상징합니다. 개발자들의 지식 공유, 네트워킹, 그리고 협력을 촉진하는 역할을 하며, 커뮤니티 내에서 새로운 아이디어와 프로젝트의 탄생을 돕습니다.
 
+## 데모 
+
+| 0. 로그인 & 로그아웃 |
+|-----|
+| ![ezgif-5-c781aa6d04](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/9c9f22ab-9e02-4fc6-9267-3910ecfba7fd) |
+
+| 1. 프로필 조회 |
+|-----|
+| ![ezgif-3-7d31370f4c](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/4dedeb2e-8afa-47e5-9200-b9e722c5f852)|
+
+| 2. 게시글 조회 |
+|-----|
+|  ![ezgif-5-eb629f9f12](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/31da3483-a8c5-4192-a35d-c40ac222391f)|
+
+| 3. 채팅 기능 |
+|-----|  
+| <video src=https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/411a3e26-d9c5-4538-952b-f821332323bd>  |
+
+| 4. 게시글 작성 |
+|-----|  
+| <video src=https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/2af01f92-833b-4941-9ea8-2f934bf797b9>  |
+
+
+
+
 
 ```
 2. 복사한 폴더로 들어가기
