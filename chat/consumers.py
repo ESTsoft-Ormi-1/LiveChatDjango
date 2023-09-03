@@ -32,7 +32,7 @@ class ChatConsumer(JsonWebsocketConsumer):
                     self.group_name,
                     {
                         "type": "chat.user.join",
-                        "username": user.email,
+                        "username": user.userprofile.nickname,
                     }
                 )
 
@@ -60,7 +60,7 @@ class ChatConsumer(JsonWebsocketConsumer):
                     self.group_name,
                     {
                         "type": "chat.user.leave",
-                        "username": user.email,
+                        "username": user.userprofile.nickname,
                     }
                 )
     
@@ -72,6 +72,8 @@ class ChatConsumer(JsonWebsocketConsumer):
 
         if _type == "chat.message":
             sender = user.email
+            nickname = user.userprofile.nickname
+            profile_picture_url =  "/media/" + user.userprofile.profile_picture.name
             message = content["message"]
             # Publish 과정: "square" 그룹 내 다른 consumer들에게 메세지를 전달합니다.
             async_to_sync(self.channel_layer.group_send)(
@@ -80,6 +82,8 @@ class ChatConsumer(JsonWebsocketConsumer):
                     "type": "chat.message",
                     "message": message,
                     "sender": sender,
+                    "nickname": nickname,
+                    "profile_picture_url": profile_picture_url
                 }
             )
         else:
@@ -103,5 +107,7 @@ class ChatConsumer(JsonWebsocketConsumer):
         self.send_json({
             "type": "chat.message",
             "message": message_dict["message"],
-            "sender": message_dict["sender"]
+            "sender": message_dict["sender"],
+            "nickname": message_dict["nickname"],
+            "profile_picture_url": message_dict["profile_picture_url"],
         })
