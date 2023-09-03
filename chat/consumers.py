@@ -92,13 +92,13 @@ class ChatConsumer(JsonWebsocketConsumer):
     def chat_user_join(self, message_dict):
         self.send_json({
             "type": "chat.user.join",
-            "username": message_dict["uesrname"]
+            "username": message_dict["username"]
         })
 
     def chat_user_leave(self, message_dict):
         self.send_json({
             "type": "chat.user.leave",
-            "username": message_dict["uesrname"]
+            "username": message_dict["username"]
         })
 
         # 그룹을 통해 type="chat.message" 메세지 받으면 호출됩니다.
