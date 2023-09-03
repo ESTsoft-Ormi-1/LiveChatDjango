@@ -45,10 +45,14 @@
 <br>
 
 ## 기획과정
-1. ERD
+1. ERD<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7861e553-8e6d-47e0-8b20-bd80faf9ec3b)
-2. Notion
+
+3. Notion<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7a7a9340-12d8-4d7e-9a59-672af9d1711d)
+
+5. usecase diagram<br>
+  ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/81bc536b-02d2-4806-a07d-42e02970a9e9)
 
 <br>
 <br>
