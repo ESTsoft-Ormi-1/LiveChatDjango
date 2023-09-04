@@ -4,7 +4,6 @@
 <img width="1384" alt="image" src="https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/882b5d47-1750-491d-a27f-a576fd8686c1">
 <br>
 <br>
-<br>
 
 # 코브라의 의미
 > "코브라"는 "**COding BRAinstorm**"의 줄임말입니다.
@@ -12,11 +11,10 @@
 코브라 스페이스는 코딩과 프로그래밍 분야에서 아이디어를 공유하고 협력하는 공간을 상징합니다.<br> 개발자들의 지식 공유, 네트워킹, 그리고 협력을 촉진하는 역할을 하며, 커뮤니티 내에서 새로운 아이디어와 프로젝트의 탄생을 돕습니다.
 <br>
 <br>
-<br>
+
 
 # 프로젝트 기간
 > 2023.08.17 ~ 2023.09.04
-<br>
 <br>
 <br>
 
@@ -46,7 +44,6 @@
 * 느낀점
 <br>
 <br>
-<br>
 
 
 ## 기획 과정 
@@ -56,10 +53,9 @@
 3. [notion](https://www.notion.so/sungbinlee/COBRA-SPACE-e177dd0169e24b34826149a405e5a21d)<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7a7a9340-12d8-4d7e-9a59-672af9d1711d)
 
-5. UML(usecase diagram)<br>
-  ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/b2a46151-a743-4102-833e-839be4df9973)
+5. [SRS](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)<br>
+ ![ezgif-5-409a05ba9e](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/aa335c32-ce1b-4b0a-90de-50f0889132af)
 
-<br>
 <br>
 <br>
 
@@ -74,18 +70,10 @@
 
 <br>
 <br>
-<br>
 
 ## 역할 분담
 ![역할과 책무 온라인 화이트보드 컬러풀한 그라데이션 멤피스 스타일 (2)](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/869dc356-2ab5-4e2f-abd9-2f189dbb758e)
 
-<br>
-<br>
-<br>
-
-## SRS
-[시스템 요구 사항](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)
-<br>
 <br>
 <br>
 
@@ -93,7 +81,7 @@
 [API 정리](https://docs.google.com/document/d/1z6bnNtL5murzaDR4MeDFhCunyq0wbunfKCsxePTGxp0/edit#heading=h.ds69zzb69q73)
 <br>
 <br>
-<br>
+
 ## 기술 및 개발환경
 :ballot_box_with_check:**기술:BackEnd**
 <p align="left"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
@@ -126,13 +114,14 @@ django-allauth~=0.54.0
 :ballot_box_with_check:**개발환경**
 개발환경|선택 방식
 ---|---
-브렌치 전략|git-flow(chat/user/post/main)
+브렌치 전략|Git-flow(chat/user/post/main)
 구조 관리|UML, ERD
 코드 포멧팅 |Prettier
-디자인|bootstrap
-배포 환경|cobrasapce.xyz
-문서화|Notion, docs
-이슈 관리|githup
+디자인|Bootstrap
+배포 환경|![제목 없는 다이어그램 drawio (2)](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/19e3f535-e4b4-489c-9519-285f79a73d95)
+문서화|Notion, Google Docs
+이슈 관리|Git
+
 <br>
 <br>
 
@@ -611,7 +600,7 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 }
 ```
 
-## UI
+## 기능 데모
 
 | 0. 로그인 & 로그아웃 |
 |-----|
@@ -635,18 +624,16 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 
 <br>
 <br>
-<br>
-
-## 배포
-![제목 없는 다이어그램 drawio (2)](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/93e27e7e-0b86-4156-bb96-a49999bc814e)
-
 
 ## 각종 사용한 링크
-[canva](https://www.canva.com/)
+[발표자료](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/files/12516992/1-1.CobraSpace.pdf)
+
+[브랜딩](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/files/12516999/cobra.space.1.pdf)
 
 ## 한계점:sweat_drops:
 
 :no_good:**이승빈** <br>
+> GCP, AWS, 네이버 클라우드 플랫폼 등 여러 플랫폼에서 다양한 프로젝트들의 배포해 보았지만 역시 배포는 매번 진행할 때마다 어려운 것 같습니다. 배포 중 발생하는 문제나 복잡성을 이해하기위해 기초적인 부분에 공부의 필요성을 느낍니다.. 그리고 팀 프로젝트를 진행하면서 Git 브랜치 전략을 나름대로 구성해봤지만 더 자세한 계획과 전략이 필요하다고 느꼇습니다.
 
 :no_good:**심민정**<br>
 > 팀 프로젝트는 처음이라 어디서부터 시작해야 할지 감을 잡기가 어려웠지만, 팀장님의 지도하에 타임라인 설정, UML, SRS 작성으로 점차 틀을 잡아나가다 보니 어려움보다 기대감이 커졌다.<br>
@@ -681,7 +668,7 @@ user의 회원가입, 로그인 기능은 장고 기술 블로그 구현할 때 
 ## 느낀점:heavy_exclamation_mark:
 
 :raising_hand:**이승빈** <br>
-> 개발에 대한 열정과 팀원들 간의 원활한 커뮤니케이션을 통해 프로젝트를 성공적으로 이끌어내기 위해 노력을 하였고 프로젝트의 기획, 개발, 배포 등 다양한 단계에서 팀원들과 협력하여 우리 프로젝트를 완성도 높은 솔루션으로 만들어내기 위해 최선을 다 했습니다!
+> 개발에 대한 열정과 팀원들 간의 원활한 커뮤니케이션을 통해 프로젝트를 성공적으로 이끌어내기 위해 노력을 하였고 프로젝트의 기획, 개발, 배포 등 다양한 단계에서 팀원들과 협력하여 우리 프로젝트를 완성도 높은 솔루션으로 만들어내기 위해 최선을 다 했습니다! 믿고 따라와준 팀원들에게 감사드립니다!
 
 :raising_hand:**심민정**<br>
 > 일반적인 과제가 아닌 '결과물'이 나와야 한다는 압박감이 있어서 내가 잘못하면 전체 팀원들에게 영향을 끼치게 될까봐 잠을 줄이고 밥먹는 시간에도 컴퓨터를 붙잡고 있으니 체력적으로 한계가 왔다.<br>
