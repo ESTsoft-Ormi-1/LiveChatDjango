@@ -57,11 +57,12 @@
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7a7a9340-12d8-4d7e-9a59-672af9d1711d)
 
 5. UML(usecase diagram)<br>
-  ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/81bc536b-02d2-4806-a07d-42e02970a9e9)
+  ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/b2a46151-a743-4102-833e-839be4df9973)
 
 <br>
 <br>
 <br>
+
 
 ## 주요 기능
 1. **게시글 기능**: 사용자들은 다양한 주제에 대한 게시글을 작성할 수 있습니다. 이 게시글은 **프로그래밍과 관련된 다양한 주제**를 다룰 수 있으며, 지식과 경험을 공유하고 질문을 할 수 있는 장을 제공합니다.
@@ -83,7 +84,7 @@
 <br>
 
 ## SRS
-[시스템 요구 사항](https://docs.google.com/document/d/1Va_ALEoxSgllnQNGoh40BLz-sRM5jG-nRxBHOGPXsxs/edit)
+[시스템 요구 사항](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)
 <br>
 <br>
 <br>
