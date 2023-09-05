@@ -50,7 +50,7 @@
 1. ERD<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7861e553-8e6d-47e0-8b20-bd80faf9ec3b)
 
-3. [notion](https://www.notion.so/sungbinlee/COBRA-SPACE-e177dd0169e24b34826149a405e5a21d)<br>
+3. [Notion](https://www.notion.so/sungbinlee/COBRA-SPACE-e177dd0169e24b34826149a405e5a21d?pvs=4)<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7a7a9340-12d8-4d7e-9a59-672af9d1711d)
 
 5. [SRS](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)<br>
