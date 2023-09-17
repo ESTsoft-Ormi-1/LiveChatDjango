@@ -630,6 +630,8 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 
 [브랜딩](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/files/12516999/cobra.space.1.pdf)
 
+[프론트엔드](https://github.com/ESTsoft-Ormi-1/cobra-space-fe)
+
 ## 한계점:sweat_drops:
 
 :no_good:**이승빈** <br>
