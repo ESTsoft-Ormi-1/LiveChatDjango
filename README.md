@@ -645,6 +645,8 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 
 [프론트엔드](https://github.com/ESTsoft-Ormi-1/cobra-space-fe)
 
+[장고 채널스 연습 레포](https://github.com/sungbinlee/django-channels-practice)
+
 ## 한계점:sweat_drops:
 
 :no_good:**이승빈** <br>
