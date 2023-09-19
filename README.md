@@ -24,28 +24,27 @@
 * [기획 과정](#기획-과정)
 * [주요 기능](#주요-기능)
 * [역할 분담](#역할-분담)
-* [SRS](#srs)
 * [API문서화](#api-문서화)
 * [기술 및 개발환경](#기술-및-개발환경)
 * [API(구현 기능)](#api)
 * [배포](#배포환경)
-* [UI(구현 동작)](#ui)
+* [UI(구현 동작)](#기능-데모)
 * [각종 사용한 링크](#각종-사용한-링크)
 * 한계점
 * 느낀점
 
 ## 기획 과정 
-1. Notion [문서 바로가기](https://www.notion.so/sungbinlee/COBRA-SPACE-e177dd0169e24b34826149a405e5a21d?pvs=4)<br>
+### 1. Notion [문서 바로가기](https://www.notion.so/sungbinlee/COBRA-SPACE-e177dd0169e24b34826149a405e5a21d?pvs=4)<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7a7a9340-12d8-4d7e-9a59-672af9d1711d)
 
 저희는 프로젝트의 진행 상황을 시각적으로 표현하기 위해 노션을 활용한 타임라인을 만들었습니다. 이 타임라인은 저희 프로젝트의 주요 이벤트와 마일스톤을 시각적으로 보여주며, 저희의 작업 일정과 진척 상황을 효과적으로 파악할 수 있도록 도와줬습니다.
 
-2. SRS [문서 바로가기](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)<br>
+### 2. SRS [문서 바로가기](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)<br>
  ![ezgif-5-409a05ba9e](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/aa335c32-ce1b-4b0a-90de-50f0889132af)
 
 저희 프로젝트의 성공적인 출발을 위해 프로젝트 시작단계에서 부터 프로젝트의 범위와 목표를 명확하게 이해하고자 시스템 요구 사항 (SRS) 문서와 유스케이스 다이어그램을 작성하였습니다.  SRS 문서는 저희 프로젝트의 핵심이자 출발점입니다. SRS에는 프로젝트 범위, 목표, 요구사항, 사용사례, 기능적 요구사항을 포함하고 있습니다. 유스케이스 다이어그램으로 주요 사용사례를 시각적으로 나타내었습니다. 이 문서를 통해 프로젝트 팀원들 간의 공유된 비전을 구체화 하였습니다. 이러한 문서와 다이어그램은 혼동을 방지하고 팀원들 간의 공동 작업을 원활하게 합니다. 이는 데이터베이스 설계를 시작할 때 필요한 기반을 제공했습니다.
 
-3. ERD<br>
+### 3. ERD<br>
   ![image](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/7861e553-8e6d-47e0-8b20-bd80faf9ec3b)
 
 SRS에서 명시된 요구사항을 바탕으로 사용자 정보를 저장하는 데이터베이스 테이블을 설계하는 데 큰 도움이 되었습니다.  문서에서 정확한 요구 사항을 기술하였기 때문에 데이터베이스 테이블과 속성을 정의하고 관계를 설정하는 데 훨씬 수월하였습니다.
