@@ -2,33 +2,23 @@
 
 **코브라 스페이스**는 코딩과 프로그래밍에 관한 주제로 된 **라이브 채팅 커뮤니티**입니다. 이 커뮤니티는 **코딩 열정가들**이 모여 정보를 공유하고 협력할 수 있는 플랫폼을 제공합니다.
 <img width="1384" alt="image" src="https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/882b5d47-1750-491d-a27f-a576fd8686c1">
-<br>
-<br>
 
 # 코브라의 의미
 > "코브라"는 "**COding BRAinstorm**"의 줄임말입니다.
 
 코브라 스페이스는 코딩과 프로그래밍 분야에서 아이디어를 공유하고 협력하는 공간을 상징합니다.<br> 개발자들의 지식 공유, 네트워킹, 그리고 협력을 촉진하는 역할을 하며, 커뮤니티 내에서 새로운 아이디어와 프로젝트의 탄생을 돕습니다.
-<br>
-<br>
-
 
 # 프로젝트 기간
 > 2023.08.17 ~ 2023.09.04
-<br>
-<br>
 
 ## 팀 코브라🐍를 소개합니다.!:smiley:
 
- 이승빈 | 심민정 |박승원 | 이준태 | 이정효 | 김권이
+ 이승빈👑 | 심민정 |박승원 | 이준태 | 이정효 | 김권이
 ----------|-----------|---------|------------|---------|--------
 <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/d9e47eff-cade-4beb-ae55-a64e48669793" width="120" height="140"/>     | <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/d9da5150-c447-4e27-a234-3a1d4f5981cc" width="120" height="140"/>| <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/6e5f685e-6e94-480b-bb4d-4868f1f00895" width="120" height="140"/>| <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/de23025c-9af5-49fc-80bd-a0dfc8326ba9" width="120" height="140"/>| <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/47954c4e-6e4a-4c0e-9efe-bf72ebb64295" width="120" height="140"/>| <img src="https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/4dc05505-8aed-4b07-a964-b04b438395f4" width="120" height="140"/>
 [:earth_asia:sungbin-lee](https://github.com/sungbinlee)     | [:earth_asia:MJ-SIM](https://github.com/MJ-SIM)| [:earth_asia:Thisish0pe](https://github.com/Thisish0pe)| [:earth_asia:ljt528](https://github.com/ljt528)| [:earth_asia:jhstar2022](https://github.com/jhstar2022) |[:earth_asia:Gonyim](https://github.com/Gonyim)
 
-저희 코브라(COding BRAinstorm)는 이스트소프트에서 주관하는 부트캠프 오르미 1기로 만나 5개월간 같이 성장해온 백엔드 주니어 개발자로 이루어진 팀 입니다. 실시간으로 채팅이 이루어지는 시스템에 대해 흥미가 생겨 코딩과 프로그래밍 분야에서 아이디어를 공유하고 협력하는 공간을 만들어 보자!라는 목표를 가지고 있습니다. 
-<br>
-<br>
-<br>
+저희 코브라는 이스트소프트에서 주관하는 백엔드 개발 부트캠프 오르미 1기로 만나 5개월간 같이 성장해온 백엔드 주니어 개발자로 이루어진 팀 입니다. 실시간으로 채팅이 이루어지는 시스템에 대해 흥미가 생겨 코딩과 프로그래밍 분야에서 아이디어를 공유하고 협력하는 공간을 만들어 보자!라는 목표를 가지고 있습니다. 
 
 ## 목차
 * [기획 과정](#기획-과정)
@@ -43,9 +33,6 @@
 * [각종 사용한 링크](#각종-사용한-링크)
 * 한계점
 * 느낀점
-<br>
-<br>
-
 
 ## 기획 과정 
 1. ERD<br>
@@ -57,9 +44,6 @@
 5. [SRS](https://docs.google.com/document/d/1t-uWXUED_-w7K44d_XIX-h0d2acwt_i6z4vMx1lA5vU/edit)<br>
  ![ezgif-5-409a05ba9e](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/aa335c32-ce1b-4b0a-90de-50f0889132af)
 
-<br>
-<br>
-
 
 ## 주요 기능
 1. **게시글 기능**: 사용자들은 다양한 주제에 대한 게시글을 작성할 수 있습니다. 이 게시글은 **프로그래밍과 관련된 다양한 주제**를 다룰 수 있으며, 지식과 경험을 공유하고 질문을 할 수 있는 장을 제공합니다.
@@ -69,19 +53,11 @@
 3. **채팅 기능**: 게시글의 주제에 따라 **채팅방에 참여**할 수 있습니다. 이렇게 하면 게시글 내용에 대한 토론을 더 쉽게 진행할 수 있으며, 사용자들은 **관심 있는 주제에 대한 논의**에 참여할 수 있습니다.
 
 
-<br>
-<br>
-
 ## 역할 분담
 ![역할과 책무 온라인 화이트보드 컬러풀한 그라데이션 멤피스 스타일 (2)](https://github.com/MJ-SIM/LiveChatDjango/assets/131655569/869dc356-2ab5-4e2f-abd9-2f189dbb758e)
 
-<br>
-<br>
-
 ## API 문서화
 [API 정리](https://docs.google.com/document/d/1z6bnNtL5murzaDR4MeDFhCunyq0wbunfKCsxePTGxp0/edit#heading=h.ds69zzb69q73)
-<br>
-<br>
 
 ## 기술 및 개발환경
 :ballot_box_with_check:**기술:BackEnd**
@@ -90,13 +66,14 @@
 <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"></p>
-<br>
 
 :ballot_box_with_check: **FE**
-제공자: 이승빈
-<br>
 
-:ballot_box_with_check:**Version**
+제공자: [이승빈](https://github.com/sungbinlee)
+
+레포지토리: https://github.com/ESTsoft-Ormi-1/cobra-space-fe 
+
+:ballot_box_with_check: **Version**
 ```
 django~=4.1.0
 djangorestframework
@@ -112,19 +89,15 @@ django-allauth~=0.54.0
 ```
 <br>
 
-:ballot_box_with_check:**개발환경**
+:ballot_box_with_check: **개발환경**
 개발환경|선택 방식
 ---|---
 브렌치 전략|Git-flow(chat/user/post/main)
 구조 관리|UML, ERD
-코드 포멧팅 |Prettier
 디자인|Bootstrap
-배포 환경|![제목 없는 다이어그램 drawio (2)](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/19e3f535-e4b4-489c-9519-285f79a73d95)
+배포 환경|Naver Cloud Platform, Nginx, Gunicorn, Daphne
 문서화|Notion, Google Docs
 이슈 관리|Git
-
-<br>
-<br>
 
 ## API
 ### 1. Chat
@@ -606,12 +579,12 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 
 프로젝트의 구조를 간략하게 도식화하였습니다.
 저희 프로젝트는 네이버 클라우드 플랫폼에서 호스팅되었으며, 아래와 같은 구조로 동작합니다.
-* 		클라이언트에서 HTTP 요청이나 WebSocket (WS) 요청을 보냅니다.
-* 		이러한 요청은 Nginx 서버로 전달됩니다. Nginx는 리버스 프록시 서버로 설정되어 있어 요청을 적절히 분배합니다.
-* 		HTTP 요청은 Gunicorn 서버로 전달됩니다. Gunicorn 서버는 동적 컨텐츠를 처리하고 필요한 데이터와 로직을 활용하여 응답을 생성합니다.
-* 		WS 요청은 Daphne 서버로 라우팅됩니다. Daphne 서버는 WebSocket 프로토콜을 이용하여 실시간 채팅과 같은 기능을 처리합니다.
-* 		Nginx 서버는 정적 컨텐츠 (예: HTML, CSS, JavaScript)를 직접 제공하며, 이를 통해 빠른 응답을 보장합니다.
-이러한 구조를 통해 정적 및8 동적 컨텐츠를 효율적으로 처리하고, WebSocket을 활용하여 실시간 기능을 구현하였습니다.
+* 클라이언트에서 HTTP 요청이나 WebSocket (WS) 요청을 보냅니다.
+* 이러한 요청은 Nginx 서버로 전달됩니다. Nginx는 리버스 프록시 서버로 설정되어 있어 요청을 적절히 분배합니다.
+* HTTP 요청은 Gunicorn 서버로 전달됩니다. Gunicorn 서버는 동적 컨텐츠를 처리하고 필요한 데이터와 로직을 활용하여 응답을 생성합니다.
+* WS 요청은 Daphne 서버로 라우팅됩니다. Daphne 서버는 WebSocket 프로토콜을 이용하여 실시간 채팅과 같은 기능을 처리합니다.
+* Nginx 서버는 정적 컨텐츠 (예: HTML, CSS, JavaScript)를 직접 제공하며, 이를 통해 빠른 응답을 보장합니다.
+이러한 구조를 통해 정적 및 동적 컨텐츠를 효율적으로 처리하고, WebSocket을 활용하여 실시간 기능을 구현하였습니다.
 
 ## 기능 데모
 
@@ -634,9 +607,6 @@ Description: 인증된 사용자가 프로필 수정 요청을 보내고 수정�
 | 4. 게시글 작성 |
 |-----|  
 | <video src=https://github.com/ESTsoft-Ormi-1/LiveChatDjango/assets/52542229/2af01f92-833b-4941-9ea8-2f934bf797b9>  |
-
-<br>
-<br>
 
 ## 각종 사용한 링크
 [발표자료](https://github.com/ESTsoft-Ormi-1/LiveChatDjango/files/12516992/1-1.CobraSpace.pdf)
