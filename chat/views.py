@@ -18,16 +18,12 @@ class ChatCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         
-        # Get the created chat
         chat = Chat.objects.get(pk=response.data['id'])
 
-        # Get the associated post (you'll need to adjust this part based on how your models are related)
         post = chat.post
 
-        # Check if a room exists for this post, create one if it doesn't
         room, created = Room.objects.get_or_create(post=post)
 
-        # Return the room data along with the chat data in the response
         room_data = RoomSerializer(room, context={'request': request}).data
         response.data['room_data'] = room_data
 
